@@ -1,0 +1,8 @@
+language: go
+
+go:
+  - 1.12
+
+script:
+  - go test -v ./...
+  - CGO_ENABLED=0 GOOS=linux go build -a -o build/catenv -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
