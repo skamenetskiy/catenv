@@ -8,15 +8,14 @@ os:
 go:
   - 1.12
 
-matrix:
-  include:
-    - os: linux
-      env: GOOS=linux
-    - os: osx
-      env: GOOS=darwin
-    - os: windows
-      env: GOOS=windows
-
 script:
   - go test -v ./...
   - CGO_ENABLED=0 go build -a -o build/catenv -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
+
+deploy:
+  provider: releases
+  api_key: ${GITHUB_OAUTH_TOKEN}
+  file: build/catenv
+  skip_cleanup: true
+  on:
+    tags: true
