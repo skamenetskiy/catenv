@@ -1,8 +1,22 @@
 language: go
 
+os:
+  - linux
+  - osx
+  - windows
+
 go:
   - 1.12
 
+matrix:
+  include:
+    - os: linux
+      env: GOOS=linux
+    - os: osx
+      env: GOOS=darwin
+    - os: windows
+      env: GOOS=windows
+
 script:
   - go test -v ./...
-  - CGO_ENABLED=0 GOOS=linux go build -a -o build/catenv -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
+  - CGO_ENABLED=0 go build -a -o build/catenv -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
