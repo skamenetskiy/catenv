@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -42,13 +43,21 @@ func main() {
 
 func getEnv() map[string]string {
 	env := make(map[string]string, 0)
+	keys := make([]string, 0)
 	for _, val := range os.Environ() {
 		v := strings.Split(val, "=")
 		if len(v) < 2 || v[0] == "" {
 			continue
 		}
-		env["$"+v[0]] = v[1]
-		env["${"+v[0]+"}"] = v[1]
+		keys = append(keys, v[0])
+	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		return len(keys[i]) > len(keys[j])
+	})
+	for _, k := range keys {
+		v := os.Getenv(k)
+		env["$"+k] = v
+		env["${"+k+"}"] = v
 	}
 	return env
 }
