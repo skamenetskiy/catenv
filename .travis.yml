@@ -9,12 +9,13 @@ go:
 
 script:
   - go test -v ./...
-  - CGO_ENABLED=0 go build -a -o build/catenv -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
+  - CGO_ENABLED=0 go build -a -o build/catenv_$TRAVIS_OS_NAME -ldflags "-s -w -extldflags -static" cmd/catenv/catenv.go
 
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
-  file: build/catenv
+  file:
+    - build/catenv_$TRAVIS_OS_NAME
   skip_cleanup: true
   on:
     tags: true
