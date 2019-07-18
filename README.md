@@ -11,7 +11,7 @@ Usage: cat <filename> | catenv -in
 ```
 
 ### Binaries
-Precompiled binaries can be downloaded in [releases](releases/latest).
+Precompiled binaries can be downloaded in [releases](https://github.com/skamenetskiy/catenv/releases/latest).
 
 ### Example
 ```yaml
