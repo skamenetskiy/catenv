@@ -6,7 +6,8 @@ A simple tool to append environment variables to a file contents. It supports bo
 
 ### Usage
 ```
-catenv <filename>
+Usage: catenv <filename>
+Usage: cat <filename> | catenv -in
 ```
 
 ### Example
