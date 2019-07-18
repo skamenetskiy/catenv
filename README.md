@@ -10,6 +10,9 @@ Usage: catenv <filename>
 Usage: cat <filename> | catenv -in
 ```
 
+### Binaries
+Precompiled binaries can be downloaded in [releases](releases/latest).
+
 ### Example
 ```yaml
 test_file:
